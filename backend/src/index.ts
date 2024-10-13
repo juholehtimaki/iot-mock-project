@@ -12,14 +12,11 @@ import { SinWaveGenerator } from "./utils/SinWaveGenerator";
 import deviceProfileDb from "./db/deviceProfileDb";
 import thresholdDb from "./db/thresholdDb";
 import anomalyDb from "./db/anomalyDb";
+import { isWithinThreshold } from "./utils/utils";
 
 const app = express();
 const port = process.env.PORT ?? 4000;
 app.use(cors());
-
-const isWithinThreshold = (val: number, threshold: Thresholds) => {
-  return val >= threshold.lower && val <= threshold.upper;
-};
 
 const onIncomingDeviceData = (dataEvent: DeviceDataItem) => {
   const { deviceId } = dataEvent;
